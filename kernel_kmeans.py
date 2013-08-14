@@ -69,7 +69,6 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
 
     def _compute_dist(self, K, dist, within_distances, update_within):
         sw = self.sample_weight_
-        ind = np.arange(sw.shape[0])
 
         for j in xrange(self.n_clusters):
             mask = self.labels_ == j
@@ -77,7 +76,6 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             if np.sum(mask) == 0:
                 raise ValueError("Empty cluster found, try smaller n_cluster.")
 
-            cluster_ind = ind[mask]
             denom = sw[mask].sum()
             denomsq = denom * denom
 
