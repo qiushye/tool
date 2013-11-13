@@ -66,10 +66,10 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             labels_old = self.labels_
             self.labels_ = dist.argmin(axis=1)
 
-            # Compute the number of samples whose cluster changed 
+            # Compute the number of samples whose cluster did not change 
             # since last iteration.
-            n_diff = np.sum((self.labels_ - labels_old) == 0)
-            if 1 - float(n_diff) / n_samples < self.tol:
+            n_same = np.sum((self.labels_ - labels_old) == 0)
+            if 1 - float(n_same) / n_samples < self.tol:
                 if self.verbose:
                     print "Converged at iteration", it + 1
                 break
