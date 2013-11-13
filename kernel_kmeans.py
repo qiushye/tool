@@ -11,6 +11,15 @@ from sklearn.utils import check_random_state
 
 
 class KernelKMeans(BaseEstimator, ClusterMixin):
+    """
+    Kernel K-means
+    
+    Reference
+    ---------
+    Kernel k-means, Spectral Clustering and Normalized Cuts.
+    Inderjit S. Dhillon, Yuqiang Guan, Brian Kulis.
+    KDD 2004.
+    """
 
     def __init__(self, n_clusters=3, max_iter=50, tol=1e-3, random_state=None,
                  kernel="linear", gamma=None, degree=3, coef0=1,
