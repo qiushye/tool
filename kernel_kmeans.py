@@ -79,6 +79,8 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         return self
 
     def _compute_dist(self, K, dist, within_distances, update_within):
+        """Compute a n_samples x n_clusters distance matrix using the 
+        kernel trick."""
         sw = self.sample_weight_
 
         for j in xrange(self.n_clusters):
