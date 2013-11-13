@@ -66,6 +66,8 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             labels_old = self.labels_
             self.labels_ = dist.argmin(axis=1)
 
+            # Compute the number of samples whose cluster changed 
+            # since last iteration.
             n_diff = np.sum((self.labels_ - labels_old) == 0)
             if 1 - float(n_diff) / n_samples < self.tol:
                 if self.verbose:
