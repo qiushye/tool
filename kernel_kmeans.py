@@ -89,7 +89,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             denomsq = denom * denom
 
             if update_within:
-                KK = K[mask][:, mask]
+                KK = K[mask][:, mask]  # K[mask, mask] does not work.
                 dist_j = np.sum(np.outer(sw[mask], sw[mask]) * KK / denomsq)
                 within_distances[j] = dist_j
                 dist[:, j] += dist_j
