@@ -34,6 +34,10 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         self.coef0 = coef0
         self.kernel_params = kernel_params
         self.verbose = verbose
+        
+    @property
+    def _pairwise(self):
+        return self.kernel == "precomputed"
 
     def _get_kernel(self, X, Y=None):
         if callable(self.kernel):
