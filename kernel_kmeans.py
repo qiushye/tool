@@ -5,6 +5,7 @@
 
 import numpy as np
 
+import sklearn
 from sklearn.base import BaseEstimator, ClusterMixin
 from sklearn.metrics.pairwise import pairwise_kernels
 from sklearn.utils import check_random_state
@@ -63,7 +64,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         dist = np.zeros((n_samples, self.n_clusters))
         self.within_distances_ = np.zeros(self.n_clusters)
 
-        for it in xrange(self.max_iter):
+        for it in range(self.max_iter):
             dist.fill(0)
             self._compute_dist(K, dist, self.within_distances_,
                                update_within=True)
@@ -75,7 +76,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             n_same = np.sum((self.labels_ - labels_old) == 0)
             if 1 - float(n_same) / n_samples < self.tol:
                 if self.verbose:
-                    print "Converged at iteration", it + 1
+                    print ("Converged at iteration", it + 1)
                 break
 
         self.X_fit_ = X
@@ -87,7 +88,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         kernel trick."""
         sw = self.sample_weight_
 
-        for j in xrange(self.n_clusters):
+        for j in range(self.n_clusters):
             mask = self.labels_ == j
 
             if np.sum(mask) == 0:
@@ -119,5 +120,5 @@ if __name__ == '__main__':
     X, y = make_blobs(n_samples=1000, centers=5, random_state=0)
 
     km = KernelKMeans(n_clusters=5, max_iter=100, random_state=0, verbose=1)
-    print km.fit_predict(X)[:10]
-    print km.predict(X[:10])
+    print (km.fit_predict(X)[:10])
+    print (km.predict(X[:10]))
